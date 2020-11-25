@@ -1,0 +1,8 @@
+{
+    "name": "gitmoji-hook",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "node-emoji": "^1.10.0"
+    }
+}
