@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const TIMEOUT_THRESHOLD = 3000;
+var emoji = require('node-emoji')
 
 checkCommitMessage();
 hookCleanup();
@@ -9,146 +10,8 @@ hookCleanup();
 async function checkCommitMessage() {
 
     const message = fs.readFileSync(process.argv[2], 'utf8').trim();
-    fs.writeFileSync(process.argv[2], emojify(message));
+    fs.writeFileSync(process.argv[2], emoji.emojify(message, (name) => name));
     process.exit(0);
-}
-
-function emojify(message) {
-    let words = message.split(' ');
-    let emojiCode = words[0];
-    let emojilessMessage = words.slice(1).join(' ');
-    let emoji = getEmoji(emojiCode);
-
-    return `${emoji} ${emojilessMessage}`;
-}
-
-function getEmoji(code) {
-    switch (code) {
-        case ':sparkles:':
-            return '✨';
-        case ':art:':
-            return '🎨';
-        case ':zap:':
-            return '⚡️';
-        case ':fire:':
-            return '🔥';
-        case ':bug:':
-            return '🐛';
-        case ':ambulance:':
-            return '🚑';
-        case ':rocket:':
-            return '🚀';
-        case ':lipstick:':
-            return '💄';
-        case ':tada:':
-            return '🎉';
-        case ':white_check_mark:':
-            return '✅';
-        case ':lock:':
-            return '🔒';
-        case ':bookmark:':
-            return '🔖';
-        case ':rotating_light:':
-            return '🚨';
-        case ':construction:':
-            return '🚧';
-        case ':green_heart:':
-            return '💚';
-        case ':arrow_down:':
-            return '⬇️';
-        case ':arrow_up:':
-            return '⬆️';
-        case ':pushpin:':
-            return '📌';
-        case ':construction_worker:':
-            return '👷';
-        case ':chart_with_upwards_trend:':
-            return '📈';
-        case ':recycle:':
-            return '♻️';
-        case ':heavy_plus_sign:':
-            return '➕';
-        case ':heavy_minus_sign:':
-            return '➖';
-        case ':wrench:':
-            return '🔧';
-        case ':hammer:':
-            return '🔨';
-        case ':globe_with_meridians:':
-            return '🌐';
-        case ':pencil2:':
-            return '✏️';
-        case ':poop:':
-            return '💩';
-        case ':rewind:':
-            return '⏪';
-        case ':twisted_rightwards_arrows:':
-            return '🔀';
-        case ':package:':
-            return '📦';
-        case ':alien:':
-            return '👽';
-        case ':truck:':
-            return '🚚';
-        case ':page_facing_up:':
-            return '📄';
-        case ':boom:':
-            return '💥';
-        case ':bento:':
-            return '🍱';
-        case ':wheelchair:':
-            return '♿️';
-        case ':bulb:':
-            return '💡';
-        case ':beers:':
-            return '🍻';
-        case ':speech_balloon:':
-            return '💬';
-        case ':card_file_box:':
-            return '🗃';
-        case ':loud_sound:':
-            return '🔊';
-        case ':mute:':
-            return '🔇';
-        case ':busts_in_silhouette:':
-            return '👥';
-        case ':children_crossing:':
-            return '🚸';
-        case ':building_construction:':
-            return '🏗';
-        case ':iphone:':
-            return '📱';
-        case ':clown_face:':
-            return '🤡';
-        case ':egg:':
-            return '🥚';
-        case ':see_no_evil:':
-            return '🙈';
-        case ':camera_flash:':
-            return '📸';
-        case ':alembic:':
-            return '⚗';
-        case ':mag:':
-            return '🔍';
-        case ':label:':
-            return '🏷️';
-        case ':seedling:':
-            return '🌱';
-        case ':triangular_flag_on_post:':
-            return '🚩';
-        case ':goal_net:':
-            return '🗑';
-        case ':hammer:':
-            return '💫';
-        case ':wastebasket:':
-            return '🗑';
-        case ':passport_control:':
-            return '🛂';
-        case ':adhesive_bandage:':
-            return '🩹';
-        default:
-            return code;
-    }
 }
 
 function hookCleanup() {
